@@ -1,13 +1,13 @@
 package HackU.humoreacher;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import HackU.humoreacher.database.AppDatabase;
-import HackU.humoreacher.database.AppDatabaseHelper;
 import HackU.humoreacher.entities.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,18 +24,18 @@ public class LoginActivity extends AppCompatActivity {
         userIdEditText = findViewById(R.id.userIdEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
 
-        // AppDatabaseHelper を使ってインスタンスを取得
-        appDatabase = AppDatabaseHelper.getDatabase(this);
+        // AppDatabase のインスタンスを取得
+        appDatabase = AppDatabase.getInstance(this);
     }
 
     // 完了ボタンが押されたときの処理
     public void onComplete(View view) {
-        String userId = userIdEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        String userId = userIdEditText.getText().toString().trim();  // 空白を除去
+        String password = passwordEditText.getText().toString().trim();  // 空白を除去
 
-        // ユーザーIDとパスワードを確認する処理を追加
+        // ユーザーIDとパスワードが空でないかチェック
         if (userId.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "ユーザーIDまたはパスワードを入力してください", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ログインIDまたはパスワードを入力してください", Toast.LENGTH_SHORT).show();
         } else {
             // ユーザーをデータベースから取得して確認
             new Thread(() -> {
