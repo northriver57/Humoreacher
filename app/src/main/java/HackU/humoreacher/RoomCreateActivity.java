@@ -28,78 +28,67 @@ public class RoomCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_create);
 
-        // XMLからビューを取得
         roomIdEditText = findViewById(R.id.roomIdEditText);
         roomPasswordEditText = findViewById(R.id.roomPasswordEditText);
         adminPasswordEditText = findViewById(R.id.adminPasswordEditText);
         createRoomButton = findViewById(R.id.createRoomButton);
 
-        appDatabase = AppDatabase.getInstance(this);
+        appDatabase = AppDatabase.getInstance(this);  // AppDatabase.getInstance(this)を使用
 
-        // 入力内容が変更されるたびにボタンをチェック
         roomIdEditText.addTextChangedListener(textWatcher);
         roomPasswordEditText.addTextChangedListener(textWatcher);
         adminPasswordEditText.addTextChangedListener(textWatcher);
     }
 
-    // 入力内容が変更されたときに呼ばれるTextWatcher
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-            checkInputFields(); // 入力を確認
+            checkInputFields();
         }
 
         @Override
         public void afterTextChanged(Editable editable) {}
     };
 
-    // 入力内容を確認して、ボタンの有効/無効を切り替える
     private void checkInputFields() {
         String roomId = roomIdEditText.getText().toString().trim();
         String roomPassword = roomPasswordEditText.getText().toString().trim();
         String adminPassword = adminPasswordEditText.getText().toString().trim();
-
-        // ルームID、ルームパスワード、管理者パスワードがすべて入力されていればボタンを有効化
         createRoomButton.setEnabled(!roomId.isEmpty() && !roomPassword.isEmpty() && !adminPassword.isEmpty());
     }
 
-    // ルーム作成ボタンが押されたときの処理
     public void onCreateRoom(View view) {
-        String roomId = roomIdEditText.getText().toString();
-        String roomPassword = roomPasswordEditText.getText().toString();
-        String adminPassword = adminPasswordEditText.getText().toString();
+        String roomId = roomIdEditText.getText().toString().trim();
+        String roomPassword = roomPasswordEditText.getText().toString().trim();
+        String adminPassword = adminPasswordEditText.getText().toString().trim();
 
-        // パスワードと管理者パスワードが同じかチェック
+        // パスワードと管理者パスワードが一致しないか確認
         if (roomPassword.equals(adminPassword)) {
             Toast.makeText(this, "パスワードと管理者パスワードは異なる必要があります", Toast.LENGTH_SHORT).show();
-            return; // ルーム作成を中止
+            return;
         }
 
-// UserDaoを使って、ルームIDの重複チェック
         new Thread(() -> {
             int count = appDatabase.userDao().isUserExists(roomId);
             runOnUiThread(() -> {
-                if (count > 0) { // COUNT(*) の結果が1以上なら既に存在
+                if (count > 0) {
                     Toast.makeText(RoomCreateActivity.this, "既にログインIDは使用されています", Toast.LENGTH_SHORT).show();
                 } else {
-                    // 重複がなければユーザー（ルーム）を作成
+                    // 新しいユーザーを作成してデータベースに挿入
                     User user = new User(roomId, roomPassword, adminPassword);
                     new Thread(() -> {
                         appDatabase.userDao().insert(user);
                         runOnUiThread(() -> {
                             Toast.makeText(RoomCreateActivity.this, "ルームが作成されました", Toast.LENGTH_SHORT).show();
-                            // 次の画面に遷移
                             startActivity(new Intent(RoomCreateActivity.this, MainActivity.class));
-                            finish();
+                            finish(); // ルーム作成画面を閉じる
                         });
                     }).start();
                 }
             });
         }).start();
-
-
     }
 }

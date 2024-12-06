@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 校長先生の話に対する星評価 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="校長先生の話を評価してください"
+        android:textSize="18sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:rating="0"/>
+
+    <!-- OKボタン -->
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:onClick="onSaveFeedback"/>
+
+    <!-- 詳しい感想を送るためのボタン -->
+    <Button
+        android:id="@+id/sendFeedbackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="詳しい感想を送る"
+        android:onClick="onSendFeedback"/>
+
+    <!-- 次回どんな話が聞きたいかの質問 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="次回どんな話が聞きたいですか？"
+        android:textSize="18sp" />
+
+    <!-- テーマ選択ボタン -->
+    <Button
+        android:id="@+id/selectThemeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="テーマを選択"
+        android:onClick="onSelectTheme"/>
+
+    <!-- ログアウトボタン -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ログアウト"
+        android:onClick="onLogout"/>
+</LinearLayout>

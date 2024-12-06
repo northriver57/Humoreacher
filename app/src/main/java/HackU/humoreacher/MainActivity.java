@@ -28,11 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     // ログイン画面に遷移
     public void goToLogin(View view) {
-        // ルームが存在しない場合、ログイン画面に遷移しない
-        if (userDao.getAllUsers().isEmpty()) {
-            Toast.makeText(this, "ルームがありません", Toast.LENGTH_SHORT).show();
-            return;  // それ以上の処理を行わない
-        }
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

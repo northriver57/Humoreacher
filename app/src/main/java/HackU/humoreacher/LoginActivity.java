@@ -1,5 +1,6 @@
 package HackU.humoreacher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText userIdEditText;
     private EditText passwordEditText;
-    private AppDatabase appDatabase;  // インスタンス変数として appDatabase を宣言
+    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         userIdEditText = findViewById(R.id.userIdEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
 
-        // AppDatabase のインスタンスを取得
-        appDatabase = AppDatabase.getInstance(this);
+        // AppDatabaseからインスタンスを取得
+        appDatabase = AppDatabase.getInstance(this);  // AppDatabase.getInstance(this)を使用
     }
 
     // 完了ボタンが押されたときの処理
@@ -37,26 +38,41 @@ public class LoginActivity extends AppCompatActivity {
         if (userId.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "ログインIDまたはパスワードを入力してください", Toast.LENGTH_SHORT).show();
         } else {
-            // ユーザーをデータベースから取得して確認
+            // 管理者ログインを先にチェック
             new Thread(() -> {
-                User user = appDatabase.userDao().getUserByIdAndPassword(userId, password);
+                User adminUser = appDatabase.userDao().getUserByIdAndAdminPassword(userId, password);
                 runOnUiThread(() -> {
-                    if (user != null) {
-                        // ログイン成功
-                        Toast.makeText(LoginActivity.this, "ログイン成功", Toast.LENGTH_SHORT).show();
-                        // 例: メイン画面に遷移
-                        // startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    if (adminUser != null) {
+                        // 管理者ログイン成功
+                        Log.d("LoginActivity", "Admin user found: " + adminUser.getId());
+                        Toast.makeText(LoginActivity.this, "管理者ログイン成功", Toast.LENGTH_SHORT).show();
+                        // 管理者用ダッシュボードに遷移
+                        Intent intent = new Intent(LoginActivity.this, PrincipalDashboardActivity.class);
+                        startActivity(intent);
+                        finish(); // ログイン画面を閉じる
                     } else {
-                        // ログイン失敗
-                        Toast.makeText(LoginActivity.this, "ユーザーIDまたはパスワードが間違っています", Toast.LENGTH_SHORT).show();
+                        // 一般ユーザーのログインチェック
+                        new Thread(() -> {
+                            User user = appDatabase.userDao().getUserByIdAndPassword(userId, password);
+                            runOnUiThread(() -> {
+                                if (user != null) {
+                                    // 一般ユーザーログイン成功
+                                    Log.d("LoginActivity", "User found: " + user.getId());
+                                    Toast.makeText(LoginActivity.this, "ログイン成功", Toast.LENGTH_SHORT).show();
+                                    // ユーザー用ダッシュボードに遷移
+                                    Intent intent = new Intent(LoginActivity.this, StudentDashboardActivity.class);
+                                    startActivity(intent);
+                                    finish(); // ログイン画面を閉じる
+                                } else {
+                                    // ログイン失敗
+                                    Log.d("LoginActivity", "User not found or wrong password");
+                                    Toast.makeText(LoginActivity.this, "ユーザーIDまたはパスワードが間違っています", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }).start();
                     }
                 });
             }).start();
         }
-    }
-
-    // 戻るボタンが押されたときの処理
-    public void onBackButtonClicked(View view) {
-        onBackPressed(); // 戻るボタンが押された時に onBackPressed() を呼び出す
     }
 }
