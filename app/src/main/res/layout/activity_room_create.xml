@@ -6,34 +6,47 @@
     android:padding="16dp"
     android:gravity="center">
 
+    <!-- ルームIDの入力フィールド -->
     <EditText
-        android:id="@+id/userIdEditText"
+        android:id="@+id/roomIdEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ユーザーID" />
+        android:hint="ルームID"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
 
+    <!-- ルームパスワードの入力フィールド -->
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/roomPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="パスワード"
+        android:hint="ルームパスワード"
         android:inputType="textPassword"
-        android:layout_marginTop="16dp" />
+        android:layout_marginBottom="16dp" />
 
+    <!-- 管理者パスワードの入力フィールド -->
     <EditText
         android:id="@+id/adminPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="管理者パスワード"
         android:inputType="textPassword"
-        android:layout_marginTop="16dp" />
+        android:layout_marginBottom="32dp" />
 
+    <!-- ルーム作成ボタン -->
     <Button
         android:id="@+id/createRoomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ルーム作成"
-        android:onClick="onCreateRoom"
-        android:layout_marginTop="16dp" />
+        android:onClick="onCreateRoom" />
+
+    <!-- 戻るボタン -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="戻る"
+        android:onClick="onBackButtonClicked" /> <!-- 戻るボタンのonClick属性を追加 -->
 
 </LinearLayout>
