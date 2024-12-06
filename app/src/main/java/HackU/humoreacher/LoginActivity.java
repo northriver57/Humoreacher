@@ -5,10 +5,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import HackU.humoreacher.database.AppDatabase;
+import HackU.humoreacher.database.AppDatabaseHelper;
+import HackU.humoreacher.entities.User;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText userIdEditText;
     private EditText passwordEditText;
+    private AppDatabase appDatabase;  // インスタンス変数として appDatabase を宣言
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +23,9 @@ public class LoginActivity extends AppCompatActivity {
 
         userIdEditText = findViewById(R.id.userIdEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+
+        // AppDatabaseHelper を使ってインスタンスを取得
+        appDatabase = AppDatabaseHelper.getDatabase(this);
     }
 
     // 完了ボタンが押されたときの処理
@@ -28,10 +37,21 @@ public class LoginActivity extends AppCompatActivity {
         if (userId.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "ユーザーIDまたはパスワードを入力してください", Toast.LENGTH_SHORT).show();
         } else {
-            // ログイン成功の処理（例: メイン画面に遷移）
-            Toast.makeText(this, "ログイン成功", Toast.LENGTH_SHORT).show();
-            // 例: メイン画面に遷移
-            // startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            // ユーザーをデータベースから取得して確認
+            new Thread(() -> {
+                User user = appDatabase.userDao().getUserByIdAndPassword(userId, password);
+                runOnUiThread(() -> {
+                    if (user != null) {
+                        // ログイン成功
+                        Toast.makeText(LoginActivity.this, "ログイン成功", Toast.LENGTH_SHORT).show();
+                        // 例: メイン画面に遷移
+                        // startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    } else {
+                        // ログイン失敗
+                        Toast.makeText(LoginActivity.this, "ユーザーIDまたはパスワードが間違っています", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }).start();
         }
     }
 
