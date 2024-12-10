@@ -3,15 +3,17 @@ package HackU.humoreacher;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RatingBar;
-
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
-
 import HackU.humoreacher.database.AppDatabase;
+import HackU.humoreacher.entities.Theme;
+
+import java.util.List;
 
 public class PrincipalDashboardActivity extends AppCompatActivity {
 
-    private RatingBar averageRatingBar;
+    private ListView themeRankingListView;
     private AppDatabase appDatabase;
 
     @Override
@@ -19,45 +21,42 @@ public class PrincipalDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_dashboard);
 
-        // RatingBarの初期化
-        averageRatingBar = findViewById(R.id.averageRatingBar);
-
         // AppDatabaseのインスタンス取得
         appDatabase = AppDatabase.getInstance(this);
 
-        // RatingBarをタップ不可に設定
-        averageRatingBar.setIsIndicator(true); // ユーザーが評価を変更できないようにする
+        // テーマランキングを表示するListView
+        themeRankingListView = findViewById(R.id.themeRankingListView);
 
-        // データベースから評価を取得し、RatingBarに設定
-        loadAverageRating();
+        // データベースからテーマを取得してランキングを表示
+        loadThemeRankings();
     }
 
-    // 平均評価をデータベースから取得して表示
-    private void loadAverageRating() {
+    private void loadThemeRankings() {
         new Thread(() -> {
-            // ここで平均評価をデータベースから取得
-            float averageRating = appDatabase.evaluationDao().getAverageRating();
-
-            // UIの更新はメインスレッドで行う
+            List<Theme> themes = appDatabase.themeDao().getAllThemesOrderedBySelectionCount();
             runOnUiThread(() -> {
-                averageRatingBar.setRating(averageRating); // RatingBarに設定
+                // テーマ名と選択数を表示するための配列を作成
+                String[] themeRankings = new String[themes.size()];
+                for (int i = 0; i < themes.size(); i++) {
+                    themeRankings[i] = themes.get(i).name + " - " + themes.get(i).selectionCount + " 回";
+                }
+
+                // ListViewにランキングを表示
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(PrincipalDashboardActivity.this, android.R.layout.simple_list_item_1, themeRankings);
+                themeRankingListView.setAdapter(adapter);
             });
         }).start();
     }
 
-    // 生徒の感想を表示する処理
+    // onViewFeedbackメソッドを追加してReviewFeedbackActivityに遷移
     public void onViewFeedback(View view) {
-        // ReviewFeedbackActivityに遷移
-        Intent intent = new Intent(this, ReviewFeedbackActivity.class);
+        Intent intent = new Intent(PrincipalDashboardActivity.this, ReviewFeedbackActivity.class);
         startActivity(intent);
     }
-
-    // ログアウト処理
     public void onLogout(View view) {
-        // 例えば、ログイン画面に遷移させるなど
-        Intent intent = new Intent(this, LoginActivity.class); // LoginActivityに遷移
+        // ログイン画面に戻る処理（またはログアウト処理）
+        Intent intent = new Intent(PrincipalDashboardActivity.this, LoginActivity.class);
         startActivity(intent);
-        finish(); // このアクティビティを終了
+        finish();
     }
-
 }

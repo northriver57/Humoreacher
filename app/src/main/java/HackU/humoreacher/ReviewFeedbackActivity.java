@@ -44,6 +44,7 @@ public class ReviewFeedbackActivity extends AppCompatActivity {
             });
         }).start();
     }
+
     public void onBackPressed(View view) {
         // アクティビティを終了して前の画面に戻る
         finish();

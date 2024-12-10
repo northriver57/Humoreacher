@@ -1,6 +1,5 @@
 package HackU.humoreacher.entities;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,41 +7,13 @@ import androidx.room.PrimaryKey;
 public class Theme {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;  // 自動生成されるID
+    public int id;  // 自動生成されるID
 
-    @ColumnInfo(name = "user_id")
-    private String userId;  // 生徒のID
+    public String name;  // テーマ名
+    public int selectionCount;  // 選ばれた回数
 
-    @ColumnInfo(name = "selected_theme")
-    private String selectedTheme;  // 生徒が選んだ次回のテーマ
-
-    // コンストラクタ、ゲッター、セッターを追加
-    public Theme(String userId, String selectedTheme) {
-        this.userId = userId;
-        this.selectedTheme = selectedTheme;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getSelectedTheme() {
-        return selectedTheme;
-    }
-
-    public void setSelectedTheme(String selectedTheme) {
-        this.selectedTheme = selectedTheme;
+    public Theme(String name) {
+        this.name = name;
+        this.selectionCount = 0;  // 初期選択回数は0
     }
 }
