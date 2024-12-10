@@ -33,8 +33,9 @@ public class RoomCreateActivity extends AppCompatActivity {
         adminPasswordEditText = findViewById(R.id.adminPasswordEditText);
         createRoomButton = findViewById(R.id.createRoomButton);
 
-        appDatabase = AppDatabase.getInstance(this);  // AppDatabase.getInstance(this)を使用
+        appDatabase = AppDatabase.getInstance(this);
 
+        // 入力欄の変更を監視し、ボタンの有効化/無効化を管理
         roomIdEditText.addTextChangedListener(textWatcher);
         roomPasswordEditText.addTextChangedListener(textWatcher);
         adminPasswordEditText.addTextChangedListener(textWatcher);
@@ -42,15 +43,15 @@ public class RoomCreateActivity extends AppCompatActivity {
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
         @Override
-        public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
             checkInputFields();
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {}
+        public void afterTextChanged(Editable s) {}
     };
 
     private void checkInputFields() {
@@ -65,7 +66,6 @@ public class RoomCreateActivity extends AppCompatActivity {
         String roomPassword = roomPasswordEditText.getText().toString().trim();
         String adminPassword = adminPasswordEditText.getText().toString().trim();
 
-        // パスワードと管理者パスワードが一致しないか確認
         if (roomPassword.equals(adminPassword)) {
             Toast.makeText(this, "パスワードと管理者パスワードは異なる必要があります", Toast.LENGTH_SHORT).show();
             return;
@@ -77,18 +77,23 @@ public class RoomCreateActivity extends AppCompatActivity {
                 if (count > 0) {
                     Toast.makeText(RoomCreateActivity.this, "既にログインIDは使用されています", Toast.LENGTH_SHORT).show();
                 } else {
-                    // 新しいユーザーを作成してデータベースに挿入
                     User user = new User(roomId, roomPassword, adminPassword);
                     new Thread(() -> {
                         appDatabase.userDao().insert(user);
                         runOnUiThread(() -> {
                             Toast.makeText(RoomCreateActivity.this, "ルームが作成されました", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RoomCreateActivity.this, MainActivity.class));
-                            finish(); // ルーム作成画面を閉じる
+                            Intent intent = new Intent(RoomCreateActivity.this, MainActivity.class);
+                            startActivity(intent);
                         });
                     }).start();
                 }
             });
         }).start();
+    }
+
+    // 戻るボタンのクリックイベント
+    public void onBackButtonClicked(View view) {
+        // 標準の戻る動作を呼び出す
+        onBackPressed();
     }
 }

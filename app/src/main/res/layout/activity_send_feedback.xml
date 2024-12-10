@@ -5,19 +5,25 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- 感想を入力するEditText -->
+
+    <!-- 送信ボタン -->
+
     <EditText
         android:id="@+id/feedbackEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="top|start"
         android:hint="感想を入力"
         android:inputType="textMultiLine"
         android:lines="5"
-        android:maxLines="5"
-        android:gravity="top|start"/>
+        android:maxLines="5" />
 
     <Button
+        android:id="@+id/sendButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="送信"
-        android:onClick="onSendFeedback"/>
+        android:onClick="onSendFeedback"
+        android:text="送信" />
+
 </LinearLayout>
