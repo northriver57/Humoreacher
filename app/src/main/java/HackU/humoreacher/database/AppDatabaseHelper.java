@@ -5,7 +5,7 @@ import androidx.room.Room;
 
 public class AppDatabaseHelper {
 
-    private static AppDatabase appDatabase;
+    public static AppDatabase appDatabase;
 
     public static AppDatabase getDatabase(Context context) {
         if (appDatabase == null) {
