@@ -45,6 +45,13 @@ public class PrincipalDashboardActivity extends AppCompatActivity {
         }).start();
     }
 
+    // 生徒の感想を表示する処理
+    public void onViewFeedback(View view) {
+        // ReviewFeedbackActivityに遷移
+        Intent intent = new Intent(this, ReviewFeedbackActivity.class);
+        startActivity(intent);
+    }
+
     // ログアウト処理
     public void onLogout(View view) {
         // 例えば、ログイン画面に遷移させるなど
