@@ -31,6 +31,9 @@
         <activity android:name=".StudentDashboardActivity" />
         <activity android:name=".PrincipalDashboardActivity" />
         <activity android:name=".SendFeedbackActivity"/>
+        <activity android:name=".ReviewFeedbackActivity"/>
+        <activity android:name=".SelectThemeActivity" />
+
     </application>
 
 </manifest>

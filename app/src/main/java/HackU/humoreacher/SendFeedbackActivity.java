@@ -58,4 +58,7 @@ public class SendFeedbackActivity extends AppCompatActivity {
             });
         }).start();
     }
+    public void onBackButtonClicked(View view) {
+        onBackPressed(); // 標準的な戻る処理
+    }
 }

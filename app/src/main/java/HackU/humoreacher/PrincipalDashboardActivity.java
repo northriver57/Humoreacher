@@ -3,15 +3,19 @@ package HackU.humoreacher;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RatingBar;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import HackU.humoreacher.database.AppDatabase;
+import HackU.humoreacher.entities.Theme;
 
 public class PrincipalDashboardActivity extends AppCompatActivity {
 
-    private RatingBar averageRatingBar;
+    private ListView rankingListView;
     private AppDatabase appDatabase;
 
     @Override
@@ -19,38 +23,35 @@ public class PrincipalDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_dashboard);
 
-        // RatingBarの初期化
-        averageRatingBar = findViewById(R.id.averageRatingBar);
-
-        // AppDatabaseのインスタンス取得
         appDatabase = AppDatabase.getInstance(this);
+        rankingListView = findViewById(R.id.rankingListView);
 
-        // RatingBarをタップ不可に設定
-        averageRatingBar.setIsIndicator(true); // ユーザーが評価を変更できないようにする
-
-        // データベースから評価を取得し、RatingBarに設定
-        loadAverageRating();
-    }
-
-    // 平均評価をデータベースから取得して表示
-    private void loadAverageRating() {
+        // テーマのランキングを表示
         new Thread(() -> {
-            // ここで平均評価をデータベースから取得
-            float averageRating = appDatabase.evaluationDao().getAverageRating();
-
-            // UIの更新はメインスレッドで行う
+            List<Theme> themes = appDatabase.themeDao().getAllThemesOrderedBySelectionCount();
             runOnUiThread(() -> {
-                averageRatingBar.setRating(averageRating); // RatingBarに設定
+                ArrayAdapter<Theme> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, themes);
+                rankingListView.setAdapter(adapter);
             });
         }).start();
+
+        // 生徒の感想を確認ボタンのクリックイベント
+        findViewById(R.id.viewFeedbackButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToReviewFeedback(v);  // goToReviewFeedback メソッドを呼び出し
+            }
+        });
     }
 
-    // ログアウト処理
-    public void onLogout(View view) {
-        // 例えば、ログイン画面に遷移させるなど
-        Intent intent = new Intent(this, LoginActivity.class); // LoginActivityに遷移
+    public void goToReviewFeedback(View view) {
+        // ReviewFeedbackActivity に遷移
+        Intent intent = new Intent(this, ReviewFeedbackActivity.class);
         startActivity(intent);
-        finish(); // このアクティビティを終了
     }
-
+    public void onLogout(View view) {
+        Intent intent = new Intent(this, LoginActivity.class); // LoginActivityは適宜変更してください
+        startActivity(intent);
+        finish(); // 現在のアクティビティを終了
+    }
 }
