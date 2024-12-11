@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import HackU.humoreacher.database.AppDatabase;
-import HackU.humoreacher.entities.Theme;
 
 import java.util.List;
 
+import HackU.humoreacher.database.AppDatabase;
+import HackU.humoreacher.entities.Theme;
+
 public class PrincipalDashboardActivity extends AppCompatActivity {
 
-    private ListView themeRankingListView;
+    private ListView rankingListView;
     private AppDatabase appDatabase;
 
     @Override
@@ -21,42 +23,35 @@ public class PrincipalDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_dashboard);
 
-        // AppDatabaseのインスタンス取得
         appDatabase = AppDatabase.getInstance(this);
+        rankingListView = findViewById(R.id.rankingListView);
 
-        // テーマランキングを表示するListView
-        themeRankingListView = findViewById(R.id.themeRankingListView);
-
-        // データベースからテーマを取得してランキングを表示
-        loadThemeRankings();
-    }
-
-    private void loadThemeRankings() {
+        // テーマのランキングを表示
         new Thread(() -> {
             List<Theme> themes = appDatabase.themeDao().getAllThemesOrderedBySelectionCount();
             runOnUiThread(() -> {
-                // テーマ名と選択数を表示するための配列を作成
-                String[] themeRankings = new String[themes.size()];
-                for (int i = 0; i < themes.size(); i++) {
-                    themeRankings[i] = themes.get(i).name + " - " + themes.get(i).selectionCount + " 回";
-                }
-
-                // ListViewにランキングを表示
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(PrincipalDashboardActivity.this, android.R.layout.simple_list_item_1, themeRankings);
-                themeRankingListView.setAdapter(adapter);
+                ArrayAdapter<Theme> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, themes);
+                rankingListView.setAdapter(adapter);
             });
         }).start();
+
+        // 生徒の感想を確認ボタンのクリックイベント
+        findViewById(R.id.viewFeedbackButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToReviewFeedback(v);  // goToReviewFeedback メソッドを呼び出し
+            }
+        });
     }
 
-    // onViewFeedbackメソッドを追加してReviewFeedbackActivityに遷移
-    public void onViewFeedback(View view) {
-        Intent intent = new Intent(PrincipalDashboardActivity.this, ReviewFeedbackActivity.class);
+    public void goToReviewFeedback(View view) {
+        // ReviewFeedbackActivity に遷移
+        Intent intent = new Intent(this, ReviewFeedbackActivity.class);
         startActivity(intent);
     }
     public void onLogout(View view) {
-        // ログイン画面に戻る処理（またはログアウト処理）
-        Intent intent = new Intent(PrincipalDashboardActivity.this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class); // LoginActivityは適宜変更してください
         startActivity(intent);
-        finish();
+        finish(); // 現在のアクティビティを終了
     }
 }
