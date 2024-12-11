@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import HackU.humoreacher.database.AppDatabase;
+import HackU.humoreacher.entities.Evaluation;
 import HackU.humoreacher.entities.User;
 
 public class StudentDashboardActivity extends AppCompatActivity {
@@ -34,26 +35,27 @@ public class StudentDashboardActivity extends AppCompatActivity {
         appDatabase = AppDatabase.getInstance(this);
     }
 
-    // OKボタンで評価を保存
     public void onSaveFeedback(View view) {
         float rating = ratingBar.getRating();
 
-        // 評価が0の場合は保存しない
         if (rating == 0) {
             Toast.makeText(this, "評価を選んでください", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // 評価をデータベースに保存する処理を追加する
+        String userId = "student123"; // ここで生徒のIDを取得（ログインした生徒のIDに変更）
+
+        // 評価をデータベースに保存する処理
         new Thread(() -> {
-            // ここでデータベースに保存する処理を実行
-            // 例: appDatabase.feedbackDao().insertFeedback(new Feedback(rating));
+            Evaluation evaluation = new Evaluation(userId, rating, ""); // ここで感想も渡せます
+            appDatabase.evaluationDao().insertEvaluation(evaluation);
 
             runOnUiThread(() -> {
                 Toast.makeText(StudentDashboardActivity.this, "評価が保存されました", Toast.LENGTH_SHORT).show();
             });
         }).start();
     }
+
 
     // 詳しい感想を送るボタン
     public void onSendFeedback(View view) {
