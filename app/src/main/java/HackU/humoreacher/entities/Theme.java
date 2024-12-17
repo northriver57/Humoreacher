@@ -1,48 +1,31 @@
 package HackU.humoreacher.entities;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "themes")
 public class Theme {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;  // 自動生成されるID
+    @PrimaryKey(autoGenerate = true)  // 自動生成されるID
+    public int id;  // IDフィールド
 
-    @ColumnInfo(name = "user_id")
-    private String userId;  // 生徒のID
+    public String name;  // テーマ名
+    public int selectionCount;  // 選択回数
 
-    @ColumnInfo(name = "selected_theme")
-    private String selectedTheme;  // 生徒が選んだ次回のテーマ
-
-    // コンストラクタ、ゲッター、セッターを追加
-    public Theme(String userId, String selectedTheme) {
-        this.userId = userId;
-        this.selectedTheme = selectedTheme;
+    // 引数のあるコンストラクタ
+    @Ignore
+    public Theme(String name, int selectionCount) {
+        this.name = name;
+        this.selectionCount = selectionCount;
     }
 
-    public int getId() {
-        return id;
-    }
+    // デフォルトの引数なしコンストラクタ（Roomが使う）
+    public Theme() {}
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getSelectedTheme() {
-        return selectedTheme;
-    }
-
-    public void setSelectedTheme(String selectedTheme) {
-        this.selectedTheme = selectedTheme;
+    @Override
+    public String toString() {
+        // nameとselectionCountを表示する例
+        return name + " : " + selectionCount;
     }
 }

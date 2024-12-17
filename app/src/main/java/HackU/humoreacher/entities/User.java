@@ -4,20 +4,20 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 
-@Entity(tableName = "users")  // テーブル名は 'users'
+@Entity(tableName = "users")
 public class User {
 
     @PrimaryKey
     @NonNull
     private String id;  // ユーザーID
-    private String password; // パスワード
-    private String adminPassword; // 管理者パスワード
+    private String password; // ユーザー用パスワード
+    private String adminPassword; // 管理者用パスワード
 
-    // コンストラクタ、ゲッター、セッターを追加
+    // コンストラクタ、ゲッター、セッター
     public User(String id, String password, String adminPassword) {
-        this.id = id;
-        this.password = password;
-        this.adminPassword = adminPassword;
+        this.id = id.trim();  // 空白を削除
+        this.password = password.trim();  // 空白を削除
+        this.adminPassword = adminPassword.trim();  // 空白を削除
     }
 
     public String getId() {
