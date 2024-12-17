@@ -2,23 +2,101 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFE88D"
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/loginButton"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ログイン"
-        android:onClick="goToLogin" />
+        android:layout_height="80dp"
+        android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/roomCreateButton"
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#C73939" />
+
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_shape" />
+    </FrameLayout>
+
+    <View
+        android:id="@+id/view3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ルーム作成"
-        android:onClick="goToRoomCreate"
-        android:layout_marginTop="16dp" />
+        android:layout_height="17dp"
+        android:background="#EADA82"
+        android:layout_marginBottom="10dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_gravity="center">
+
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/triangle"/>
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/triangle2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="180dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="95dp"
+                android:layout_marginBottom="160dp"
+                android:background="#80FFFFFF"
+                android:gravity="center"
+                android:text="笑いの校長"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="goToLogin"
+                android:text="ログイン" />
+
+            <Button
+                android:id="@+id/roomCreateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="goToRoomCreate"
+                android:text="ルーム作成" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#CC9D46" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:background="#DDAA4C" />
 
 </LinearLayout>
