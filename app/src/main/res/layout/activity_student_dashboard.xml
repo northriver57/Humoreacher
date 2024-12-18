@@ -1,62 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/custom_background"
     android:padding="16dp">
 
     <!-- 校長先生の話に対する星評価 -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="校長先生の話を評価してください"
-        android:textSize="18sp" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="1.0"
-        android:rating="0"/>
-
-    <!-- OKボタン -->
-    <Button
-        android:id="@+id/okButton"
+    <View
+        android:id="@+id/view6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        android:onClick="onSaveFeedback"/>
+        android:layout_height="match_parent"
+        android:background="#60FFFFFF" />
 
-    <!-- 詳しい感想を送るためのボタン -->
-    <Button
-        android:id="@+id/sendFeedbackButton"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="詳しい感想を送る"
-        android:onClick="onSendFeedback"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <!-- 次回どんな話が聞きたいかの質問 -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="次回どんな話が聞きたいですか？"
-        android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:text="校長先生の話を評価してください"
+            android:textSize="18sp" />
 
-    <!-- テーマ選択ボタン -->
-    <Button
-        android:id="@+id/selectThemeButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="テーマを選択"
-        android:onClick="onSelectTheme"/>
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1.0" />
 
-    <!-- ログアウトボタン -->
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ログアウト"
-        android:onClick="onLogout"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/okButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:onClick="onSaveFeedback"
+            android:text="OK" />
+
+        <Button
+            android:id="@+id/sendFeedbackButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSendFeedback"
+            android:text="詳しい感想を送る" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="次回どんな話が聞きたいですか？"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/selectThemeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="onSelectTheme"
+            android:text="テーマを選択" />
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:onClick="onLogout"
+            android:text="ログアウト" />
+    </LinearLayout>
+
+</FrameLayout>
