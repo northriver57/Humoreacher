@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back2"
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center">
@@ -46,7 +47,9 @@
         android:id="@+id/backButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="戻る"
-        android:onClick="onBackButtonClicked" />
+        android:backgroundTint="#F44336"
+        android:onClick="onBackButtonClicked"
+        android:text="戻る" /> <!-- 戻るボタンのonClick属性を追加 -->
+
 
 </LinearLayout>
