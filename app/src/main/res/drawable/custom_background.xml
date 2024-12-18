@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+    <shape android:shape="rectangle">
+        <solid android:color="#FFE88D"/>
+    </shape>
+</item>
+<item android:top="0dp" android:height="100dp">
+    <shape android:shape="rectangle">
+        <solid android:color="#C73939" />
+
+    </shape>
+</item>
+    <item android:top="20dp" android:left="160dp" android:right="160dp" android:bottom="660dp">
+        <shape android:shape="oval">
+            <solid android:color="#EADA82" /> <!-- 同じ黄色で円を描画 -->
+            <size android:width="50dp" android:height="50dp" />
+        </shape>
+    </item>
+    <item android:top="100dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#EADA82" />
+            <size android:height="17dp" android:width="400dp"/>
+        </shape>
+    </item>
+    <item android:top="117dp" android:left="0dp" android:bottom="180dp" android:drawable="@drawable/triangle">
+
+    </item>
+    <item android:top="117dp" android:right="0dp" android:bottom="180dp" android:drawable="@drawable/triangle2">
+
+    </item>
+    <item android:top="550dp" android:bottom="150dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#CC9D46"/>
+            <size android:height="30dp"/>
+        </shape>
+    </item>
+    <item android:top="580dp" android:bottom="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#DDAA4C"/>
+            <size android:height="150dp"/>
+        </shape>
+    </item>
+</layer-list>
