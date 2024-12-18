@@ -2,9 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
     android:padding="16dp">
 
     <!-- 生徒の感想リスト -->
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#60FFFFFF" />
+
     <ListView
         android:id="@+id/feedbackListView"
         android:layout_width="match_parent"
