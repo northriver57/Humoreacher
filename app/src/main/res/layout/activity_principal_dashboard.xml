@@ -1,7 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+    <!-- 平均評価（星） -->
+    <TextView
+        android:id="@+id/averageRatingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="平均評価"
+        android:textSize="18sp"
+        android:paddingBottom="16dp"/>
+
+    <!-- 評価の表示（タップ不可のRatingBar） -->
+    <RatingBar
+        android:id="@+id/averageRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:rating="0"
+        android:isIndicator="true" /> <!-- タップ不可に設定 -->
+
+    <!-- 生徒の感想を表示するボタン -->
+    <Button
+        android:id="@+id/viewFeedbackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="生徒の感想を確認" />
+
+    <!-- 次回のテーマランキング -->
+    <TextView
+        android:id="@+id/principalDashboardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="次回聞きたいテーマランキング"
+        android:textSize="18sp"
+        android:paddingBottom="16dp" />
+
+    <!-- ランキングを表示するリストビュー -->
+    <ListView
+        android:id="@+id/rankingListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />  <!-- リストにスペースを与える -->
+
+    <!-- ログアウトボタン -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ログアウト"
+        android:onClick="onLogout" />
+</LinearLayout>

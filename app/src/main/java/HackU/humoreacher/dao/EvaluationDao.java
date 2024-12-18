@@ -9,12 +9,19 @@ import HackU.humoreacher.entities.Evaluation;
 @Dao
 public interface EvaluationDao {
 
+    // 新しい評価を挿入
     @Insert
-    void insert(Evaluation evaluation);
+    void insertEvaluation(Evaluation evaluation);
 
-    @Query("SELECT AVG(rating) FROM evaluations WHERE user_id = :userId")
-    float getAverageRating(String userId);  // 平均評価を取得
-
+    // 特定のユーザーの評価を取得
     @Query("SELECT * FROM evaluations WHERE user_id = :userId")
-    List<Evaluation> getEvaluationsByUser(String userId);  // 特定のユーザーの評価を取得
+    List<Evaluation> getEvaluationsByUserId(String userId);
+
+    // 全ての評価を取得（必要に応じて）
+    @Query("SELECT * FROM evaluations")
+    List<Evaluation> getAllEvaluations();
+
+    // 平均評価を取得
+    @Query("SELECT AVG(rating) FROM evaluations")
+    float getAverageRating(); // 評価の平均を取得
 }

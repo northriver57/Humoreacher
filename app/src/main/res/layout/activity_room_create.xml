@@ -51,4 +51,5 @@
         android:onClick="onBackButtonClicked"
         android:text="戻る" /> <!-- 戻るボタンのonClick属性を追加 -->
 
+
 </LinearLayout>
