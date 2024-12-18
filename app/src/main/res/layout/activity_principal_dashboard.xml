@@ -4,6 +4,8 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+</androidx.constraintlayout.widget.ConstraintLayout>
+=======
     <!-- 平均評価（星） -->
     <TextView
         android:id="@+id/averageRatingText"

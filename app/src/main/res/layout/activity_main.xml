@@ -3,22 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/back2"
     android:padding="16dp"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/loginButton"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ログイン"
-        android:onClick="goToLogin" />
+        android:fontFamily="@font/LightNovelPOPv2"
+        android:text="笑いの校長"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="281dp"
+        android:layout_height="78dp"
+        android:onClick="goToLogin"
+        android:text="ログイン" />
 
     <Button
         android:id="@+id/roomCreateButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ルーム作成"
+        android:layout_width="284dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="16dp"
         android:onClick="goToRoomCreate"
-        android:layout_marginTop="16dp" />
+        android:text="ルーム作成" />
 
 </LinearLayout>
