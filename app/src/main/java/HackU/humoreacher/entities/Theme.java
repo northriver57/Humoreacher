@@ -26,6 +26,6 @@ public class Theme {
     @Override
     public String toString() {
         // nameとselectionCountを表示する例
-        return name + " : " + selectionCount;
+        return name;
     }
 }
