@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/custom_background"
     android:orientation="vertical"
-    android:background="@drawable/back2"
     android:padding="16dp"
     android:gravity="center">
 
