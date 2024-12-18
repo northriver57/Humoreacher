@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
     android:orientation="vertical"
     android:background="@drawable/back2"
     android:padding="16dp"
     android:gravity="center">
+
 
     <TextView
         android:id="@+id/textView2"
@@ -29,5 +31,4 @@
         android:layout_marginTop="16dp"
         android:onClick="goToRoomCreate"
         android:text="ルーム作成" />
-
 </LinearLayout>
