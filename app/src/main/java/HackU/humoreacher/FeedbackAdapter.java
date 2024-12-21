@@ -13,8 +13,8 @@ import HackU.humoreacher.entities.Evaluation;
 
 public class FeedbackAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Evaluation> evaluations;
+    private final Context context;
+    private final List<Evaluation> evaluations;
 
     public FeedbackAdapter(Context context, List<Evaluation> evaluations) {
         this.context = context;
@@ -38,16 +38,27 @@ public class FeedbackAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+
+        // ViewHolder パターンの使用でパフォーマンス向上
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_feedback, parent, false);
+            holder = new ViewHolder();
+            holder.feedbackText = convertView.findViewById(R.id.feedbackText);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        // レイアウトファイルにバインドする
+        // データをバインド
         Evaluation evaluation = evaluations.get(position);
-
-        TextView feedbackText = convertView.findViewById(R.id.feedbackText);
-        feedbackText.setText(evaluation.getFeedback()); // Evaluationのフィードバックを表示
+        holder.feedbackText.setText(evaluation.getFeedback());
 
         return convertView;
+    }
+
+    // ViewHolder クラス
+    private static class ViewHolder {
+        TextView feedbackText;
     }
 }

@@ -34,7 +34,7 @@ public class SendFeedbackActivity extends AppCompatActivity {
     public void onSendFeedback(View view) {
         String feedback = feedbackEditText.getText().toString().trim();
 
-        // 感想が空でないか確認
+        // 感想が空または空白のみの場合は送信を防止
         if (feedback.isEmpty()) {
             Toast.makeText(this, "感想を入力してください", Toast.LENGTH_SHORT).show();
             return;
@@ -58,6 +58,7 @@ public class SendFeedbackActivity extends AppCompatActivity {
             });
         }).start();
     }
+
     public void onBackButtonClicked(View view) {
         onBackPressed(); // 標準的な戻る処理
     }
