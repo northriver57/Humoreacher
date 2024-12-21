@@ -43,14 +43,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:onClick="onSaveFeedback"
-            android:text="OK" />
+            android:text="OK"
+            android:backgroundTint="#F58820"/>
 
         <Button
             android:id="@+id/sendFeedbackButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onSendFeedback"
-            android:text="詳しい感想を送る" />
+            android:text="詳しい感想を送る"
+            android:backgroundTint="#F58820"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,7 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:onClick="onSelectTheme"
-            android:text="テーマを選択" />
+            android:text="テーマを選択"
+            android:backgroundTint="#F58820"/>
 
         <Button
             android:id="@+id/logoutButton"
@@ -74,7 +77,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:onClick="onLogout"
-            android:text="ログアウト" />
+            android:text="ログアウト"
+            android:backgroundTint="#F58820"/>
     </LinearLayout>
 
 </FrameLayout>

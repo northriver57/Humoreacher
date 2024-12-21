@@ -24,14 +24,16 @@
             android:layout_marginTop="250dp"
             android:layout_marginBottom="30dp"
             android:onClick="onSelectTheme"
-            android:text="テーマ1" />
+            android:text="テーマ1"
+            android:backgroundTint="#F58820"/>
 
         <Button
             android:id="@+id/selectThemeButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onSelectTheme"
-            android:text="テーマ2" />
+            android:text="テーマ2"
+            android:backgroundTint="#F58820"/>
     </LinearLayout>
 
 </FrameLayout>

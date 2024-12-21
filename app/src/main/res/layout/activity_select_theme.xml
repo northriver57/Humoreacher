@@ -45,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:onClick="onBackButtonClicked"
                 android:layout_marginTop="560dp"
-                android:text="戻る" />
+                android:text="戻る"
+                android:backgroundTint="#F58820"/>
         </RelativeLayout>
 
     </LinearLayout>

@@ -29,7 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="goToLogin"
-            android:text="ログイン" />
+            android:text="ログイン"
+            android:backgroundTint="#F58820"/>
 
         <Button
             android:id="@+id/roomCreateButton"
@@ -37,7 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:onClick="goToRoomCreate"
-            android:text="ルーム作成" />
+            android:text="ルーム作成"
+            android:backgroundTint="#F58820"/>
     </LinearLayout>
 
 </LinearLayout>

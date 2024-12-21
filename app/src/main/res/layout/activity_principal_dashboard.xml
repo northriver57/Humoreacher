@@ -39,7 +39,8 @@
             android:id="@+id/viewFeedbackButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="生徒の感想を確認" />
+            android:text="生徒の感想を確認"
+            android:backgroundTint="#F58820"/>
 
         <TextView
             android:id="@+id/principalDashboardTitle"
@@ -61,6 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onLogout"
-            android:text="ログアウト" />
+            android:text="ログアウト"
+            android:backgroundTint="#F58820"/>
     </LinearLayout>
 </FrameLayout>

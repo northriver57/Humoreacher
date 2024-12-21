@@ -26,5 +26,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        android:onClick="onBackPressed" />
+        android:onClick="onBackPressed"
+        android:backgroundTint="#F58820"/>
 </RelativeLayout>

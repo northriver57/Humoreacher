@@ -39,7 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onComplete"
-            android:text="完了" />
+            android:text="完了"
+            android:backgroundTint="#F58820"/>
 
         <Button
             android:id="@+id/backButton"
@@ -47,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:onClick="onBackButtonClicked"
-            android:text="戻る" />
+            android:text="戻る"
+            android:backgroundTint="#F58820"/>
     </LinearLayout>
 
     <!-- パスワードの入力フィールド -->

@@ -49,14 +49,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onCreateRoom"
-            android:text="ルーム作成" />
+            android:text="ルーム作成"
+            android:backgroundTint="#F58820"/>
 
         <Button
             android:id="@+id/backButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onBackButtonClicked"
-            android:text="戻る" />
+            android:text="戻る"
+            android:backgroundTint="#F58820"/>
     </LinearLayout>
 
     <!-- ルームパスワードの入力フィールド -->
